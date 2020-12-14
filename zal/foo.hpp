@@ -8,19 +8,19 @@
 #include <vector>
 using namespace std;
 
-vector< char > foo(list< Human >& people)
+std::vector< char > foo(std::list< Human >& people)
 {
-    vector< char > ret_v;
+    std::vector< char > ret_v(people.size());
 
-    std::for_each(people.rbegin(), people.rend(), [](Human& i) { i.birthday(); });
+    std::for_each(people.begin(), people.end(), [](Human& i) { i.birthday(); });
 
-    std::transform(people.rbegin(), people.rend(), ret_v.begin(), [](Human& it) {
-        if (it.isMonster() == true) {
+    std::transform(people.begin(), people.end(), ret_v.rbegin(), [](Human& it) {
+        if (it.isMonster()) {
             return 'n';
         }
         else {
             return 'y';
         }
     });
-    return {ret_v};
+    return ret_v;
 }
